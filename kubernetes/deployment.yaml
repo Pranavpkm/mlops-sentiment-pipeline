@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: sentiment-app
-        image: REPLACE_WITH_ECR_URL:latest
+        image: REPLACE_WITH_ECR_URL:ecr_repository_url = "116981769659.dkr.ecr.us-east-1.amazonaws.com/mlops-sentiment-app
         ports:
         - containerPort: 8000
         env:
