@@ -12,14 +12,26 @@ spec:
       labels:
         app: sentiment-app
     spec:
+      imagePullSecrets:
+      - name: ecr-secret
       containers:
       - name: sentiment-app
-        image: REPLACE_WITH_ECR_URL:ecr_repository_url = "116981769659.dkr.ecr.us-east-1.amazonaws.com/mlops-sentiment-app
+        image: 116981769659.dkr.ecr.us-east-1.amazonaws.com/mlops-sentiment-app:latest
         ports:
         - containerPort: 8000
         env:
         - name: AWS_DEFAULT_REGION
           value: "us-east-1"
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: aws-credentials
+              key: AWS_ACCESS_KEY_ID
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: aws-credentials
+              key: AWS_SECRET_ACCESS_KEY
         resources:
           requests:
             cpu: 100m
